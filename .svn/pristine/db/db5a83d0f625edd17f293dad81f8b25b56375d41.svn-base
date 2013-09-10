@@ -1,0 +1,149 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.MenuItem;
+
+public class MatchItemActivity extends Activity {
+
+	private ListView matchList;
+	private ArrayAdapter<String> matchAdapter;
+	private Context context;
+	private static int clickTask_item;
+	private ArrayList<Item> matchArrayList = new ArrayList<Item>();
+	private ArrayList<String> matchTitles = new ArrayList<String>();
+	private CharSequence text;
+	private int duration = Toast.LENGTH_SHORT;
+	private String lostOrFound;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_match);
+		context = getApplicationContext();
+		matchList = (ListView) findViewById(R.id.match_list);
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		// filter out resolved and lost/found items for matching
+		
+		matchArrayList = Search.byIsResolved(false);
+		matchArrayList = Search.byIsFound(!bundle.getBoolean("isFound"),matchArrayList);	
+		Search.forMatchByTitle(bundle.getString("title"), matchArrayList);
+		Search.forMatchByCity(bundle.getString("city"), matchArrayList);
+		Search.forMatchByState(bundle.getString("state"), matchArrayList);
+		Search.forMatchByCategory(bundle.getString("category"), matchArrayList);
+		Search.forMatchByMonth(bundle.getInt("month"), matchArrayList);
+		Search.forMatchByDay(bundle.getInt("day"), matchArrayList);
+		Search.forMatchByYear(bundle.getInt("year"), matchArrayList);
+		Collections.sort(matchArrayList,new ItemComparator());
+		
+		if(matchArrayList.size() > 0) {
+			
+			for(int i = 0; i < matchArrayList.size(); i++) {
+				if(matchArrayList.get(i).getIsFound()==true) {
+					
+					lostOrFound = "Found";
+					
+				}
+				else if(matchArrayList.get(i).getIsFound()==false) {
+					
+					lostOrFound = "Lost";
+					
+				}	
+				matchTitles.add(matchArrayList.get(i).getTitle() + " : "+
+						   lostOrFound);
+			}// end for
+		}
+		else
+		{
+			matchTitles.add("No Items");
+		}
+		matchAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1,matchTitles);
+		matchList.setAdapter(matchAdapter);
+		
+		matchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, 
+					int position,
+					long id) {
+
+				String itemName = ((TextView)view).getText().toString();
+				// find the ":" in the title
+				int index_of_endName = itemName.indexOf(":");
+				if (!itemName.equals("No Items")) {
+					
+					itemName = itemName.substring(0, index_of_endName-1);
+					
+				}
+				for (int i = 0; i < Search.items.size();i++) {
+					
+					if (Search.items.get(i).getTitle().equals(itemName)) {
+						
+						clickTask_item = i;
+						
+					}
+					
+				}
+				// check to make sure the text you click is an item
+				if (!itemName.equals("No Items")) {
+					
+					Intent myIntent = new Intent(view.getContext(), 
+							ItemActivity.class);
+					myIntent.putExtra("item", clickTask_item);
+					view.getContext().startActivity(myIntent);
+				
+				}
+			
+			}
+			
+		});
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_match, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch(item.getItemId()){
+		case R.id.logOut:
+			Login.logOut();
+			Intent intent = new Intent(this,MainActivity.class);
+			this.startActivity(intent);
+			break;
+		case R.id.user_profile:
+			Intent intent3 = new Intent(this,UserActivity.class);
+			this.startActivity(intent3);
+			break;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		return true;
+	}
+public void onBackPressed() {
+		
+		Intent intent = new Intent(this,UserActivity.class);
+		this.startActivity(intent);
+		
+		
+	}
+
+}

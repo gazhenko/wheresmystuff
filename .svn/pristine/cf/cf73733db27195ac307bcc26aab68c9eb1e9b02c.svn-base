@@ -1,0 +1,26 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+/**
+ * This class receives parameters from the calling code
+ * and concatenates the strings and sends the value to
+ * the writer class.
+ * 
+ * @author acranford6
+ * @version 1.0 26Feb2013
+ */
+public class Register {
+	
+	/**
+	 * This method takes in three string parameters and 
+	 * formats a new string that is in an acceptable format
+	 * for the writer class. (FORMAT: userName,passWord,phoneNumber)
+	 * 
+	 * @param userName
+	 * @param passWord
+	 * @param phoneNumber
+	 */
+	public static void registerUser(String userName, String passWord, String phoneNumber)
+	{
+		//TODO need to code this
+	}// end registerUser
+}// end Register

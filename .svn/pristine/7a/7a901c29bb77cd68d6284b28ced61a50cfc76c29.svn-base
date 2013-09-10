@@ -1,0 +1,187 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.view.MenuItem;
+
+/**
+ * Controls the functionality for the search page
+ * 
+ * @author theNullTerminators
+ * 
+ */
+public class SearchActivity extends Activity {
+
+	private Button filterBy;
+	private ListView searchList;
+	private ArrayAdapter<String> searchAdapter;
+	private Context context;
+	private static int clickTask_item;
+	private ArrayList<Item> searchArrayList = new ArrayList<Item>();
+	private ArrayList<String> searchTitles = new ArrayList<String>();
+	private String lostOrFound;
+
+
+	/**
+	 * sets up datastructures for the search
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search);
+		context = getApplicationContext();
+		filterBy = (Button) findViewById(R.id.search_button_filter);
+		searchList = (ListView) findViewById(R.id.search_list);
+		// set up the searched array list from filtered list (if not filtered,
+		// just full items list)
+		searchArrayList = Search.items;
+		Intent intent = getIntent();
+		if (intent.hasExtra("array")) {
+
+			Bundle bundle = intent.getExtras();
+			searchArrayList = (ArrayList<Item>) bundle.get("array");
+
+		}
+		if (searchArrayList.size() > 0) {
+
+			for (int i = 0; i < searchArrayList.size(); i++) {
+
+				if (searchArrayList.get(i).getIsFound() == true) {
+
+					lostOrFound = "Found";
+
+				} else if (searchArrayList.get(i).getIsFound() == false) {
+
+					lostOrFound = "Lost";
+
+				}
+				searchTitles.add(searchArrayList.get(i).getTitle() + " : "
+						+ lostOrFound);
+			}// end for
+		} else {
+			searchTitles.add("No Items");
+		}
+		searchAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, searchTitles);
+		searchList.setAdapter(searchAdapter);
+
+		filterBy.setOnClickListener(new OnClickListener() {
+
+			/**
+			 * moves to the filter search page
+			 */
+			@Override
+			public void onClick(View v) {
+				Intent myGoto = new Intent(v.getContext(), FilterItems.class);
+				v.getContext().startActivity(myGoto);
+			}
+		}); // end filterBy button listener
+
+
+		searchList
+				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+					/**
+					 * displays the result of a search
+					 */
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+
+						String itemName = ((TextView) view).getText()
+								.toString();
+						// find the ":" in the title
+						int index_of_endName = itemName.indexOf(":");
+						if (!itemName.equals("No Items")) {
+
+							itemName = itemName.substring(0,
+									index_of_endName - 1);
+
+						}
+						for (int i = 0; i < Search.items.size(); i++) {
+
+							if (Search.items.get(i).getTitle().equals(itemName)) {
+
+								clickTask_item = i;
+
+							}
+
+						}
+						// check to make sure the text you click is an item
+						if (!itemName.equals("No Items")) {
+
+							Intent myIntent = new Intent(view.getContext(),
+									ItemActivity.class);
+							myIntent.putExtra("item", clickTask_item);
+							view.getContext().startActivity(myIntent);
+
+						}
+
+
+					}
+
+				});
+
+	}
+
+	/**
+	 * sets up menu for page
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_search, menu);
+		return true;
+	}
+
+
+	/**
+	 * creates intent based on button pressed
+	 */
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.logOut:
+			Login.logOut();
+			Intent intent = new Intent(this, MainActivity.class);
+			this.startActivity(intent);
+			break;
+		case R.id.user_profile:
+			Intent intent3 = new Intent(this, UserActivity.class);
+			this.startActivity(intent3);
+			break;
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
+		return true;
+	}
+
+
+	/**
+	 * sets up back button functionality
+	 */
+	public void onBackPressed() {
+
+		Intent intent = new Intent(this, UserActivity.class);
+
+		this.startActivity(intent);
+
+	}
+
+}

@@ -1,0 +1,149 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import edu.gatech.cs2340.thenullterminators.wheresmystuff.R;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+ * Controls the startup page functionality
+ * 
+ * @author theNullTerminators
+ * 
+ */
+public class MainActivity extends Activity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
+	private TextView usr, pass, sp1, sp2, sp3, sp4;
+	private EditText tUser, tPass;
+	private Button log, reg;
+	private String tempName, tempPass;
+
+	private Context context;
+	private CharSequence text;
+	private int duration = Toast.LENGTH_SHORT; // the duration of toast to be shown
+
+	/**
+	 * creates login and register button
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		Login.initAdminUser();
+		log = (Button) findViewById(R.id.main_tolog);
+		reg = (Button) findViewById(R.id.main_toreg);
+		context = getApplicationContext();
+
+		// Create the local data structure for items
+		try {
+
+			FileInputStream fis = context.openFileInput("Item.ser");
+			ObjectInputStream is = new ObjectInputStream(fis);
+			Search.items = (ArrayList<Item>) is.readObject();
+			is.close();
+			fis.close();
+			System.out.println("I read the file!");
+
+		} catch (IOException i) {
+
+			i.printStackTrace();
+			System.out.println("I didn't read the file!");
+
+		} catch (ClassNotFoundException c) {
+
+			c.printStackTrace();
+			System.out.println("I didn't read the file!");
+
+		}
+
+		// Create the local data structure for users
+		try {
+
+			// FileInputStream fileIn = openFileInput("User.ser");
+			// ObjectInputStream in = new ObjectInputStream(fileIn);
+			// Login.users = (ArrayList<User>) in.readObject();
+			// in.close();
+			// fileIn.close();
+			FileInputStream fis = context.openFileInput("User.ser");
+			ObjectInputStream is = new ObjectInputStream(fis);
+			Login.users = (ArrayList<User>) is.readObject();
+			is.close();
+			fis.close();
+			System.out.println("I read the file!");
+
+		} catch (IOException i) {
+
+			i.printStackTrace();
+			System.out.println("I didn't read the file!");
+
+		} catch (ClassNotFoundException c) {
+
+			c.printStackTrace();
+			System.out.println("I didn't read the file!");
+
+		}
+
+		// login button
+		log.setOnClickListener(new View.OnClickListener() {
+			/**
+			 * moves to login page
+			 */
+			@Override
+			public void onClick(View v) {
+				Intent myGoto = new Intent(v.getContext(), LoginActivity.class);
+				v.getContext().startActivity(myGoto);
+			}
+		}); // end login listener
+
+		// register button
+		reg.setOnClickListener(new View.OnClickListener() {
+			/**
+			 * moves to register page
+			 */
+			@Override
+			public void onClick(View v) {
+				Intent myGoto = new Intent(v.getContext(),
+						RegisterActivity.class);
+				v.getContext().startActivity(myGoto);
+			}
+		}); // end register listener
+	}// end onCreate
+
+	/**
+	 * sets up menu
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/**
+	 * prevents the back button from working
+	 */
+	@Override
+	public void onBackPressed() {
+
+		// do nothing!
+	}
+}

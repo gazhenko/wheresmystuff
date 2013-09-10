@@ -1,0 +1,104 @@
+package edu.gatech.cs2340.thenullterminators.database;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class SQLiteOpenHelperWMS {
+
+	public static final String KEY_ROWIDU = "_idu"; // row ID for users
+	public static final String KEY_ROWIDI = "_idi"; // row ID for items
+	public static final String KEY_USERNAME = "username";
+	public static final String KEY_PASSWORD = "password";
+	public static final String KEY_PHONE = "phone";
+	public static final String KEY_TITLE = "title";
+	public static final String KEY_CATEGORY = "category";
+	public static final String KEY_CITY = "city";
+	public static final String KEY_STATE = "state";
+	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_ISLOST = "islost";
+	public static final String KEY_REWARD = "reward";
+	public static final String KEY_MONTH = "month";
+	public static final String KEY_DAY = "day";
+	public static final String KEY_YEAR = "year";
+	public static final String KEY_ISRESOLVED = "isresolved";
+	public static final String KEY_ITEMUSER = "itemuser"; // the user who created item
+	
+	private static final String DATABASE_NAME = "wheresmystuffDB";
+	private static final String DATABASE_TABLE_USERS = "userTable";
+	private static final String DATABASE_TABLE_ITEMS = "itemTable";
+	private static final int DATABASE_VERSION = 1;
+	
+	private DbHelper ourHelper;
+	private final Context ourContext;
+	private SQLiteDatabase ourDatabase;
+	
+	private static class DbHelper extends SQLiteOpenHelper {
+
+		public DbHelper(Context context) {
+			
+			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+			
+		}
+
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			
+			db.execSQL(
+					
+					"CREATE TABLE " + DATABASE_TABLE_USERS + " (" + 		// create table
+					KEY_ROWIDU + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  	// row id
+					KEY_USERNAME + " TEXT NOT NULL, " + 					// user name
+					KEY_PASSWORD + " TEXT NOT NULL, " +						// password
+					KEY_PHONE + "INTEGER NOT NULL);"						// phone #
+					
+					);
+			
+			db.execSQL(
+					
+					"CREATE TABLE " + DATABASE_TABLE_ITEMS + " (" +
+					KEY_ROWIDI + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+					KEY_TITLE + " TEXT NOT NULL, " +
+					KEY_CATEGORY + " TEXT NOT NULL, " +
+					KEY_CITY + " TEXT NOT NULL, " +
+					KEY_STATE + " TEXT NOT NULL, " +
+					KEY_DESCRIPTION + " TEXT NOT NULL, " +
+					KEY_ISLOST + " TEXT NOT NULL, " + // needs to be changed from boolean to string
+					KEY_REWARD + " TEXT NOT NULL, " +
+					KEY_MONTH + " INTEGER NOT NULL, " +
+					KEY_DAY + " INTEGER NOT NULL, " +
+					KEY_YEAR + " INTEGER NOT NULL, " +
+					KEY_ISRESOLVED + " TEXT NOT NULL, " + // needs to be changed from boolean to string
+					KEY_ITEMUSER + " TEXT NOT NULL);" // needs to be changed from user to string
+					
+					);
+			
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_USERS);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ITEMS);
+			onCreate(db);
+			
+		}
+		
+	}
+	
+	public SQLiteOpenHelperWMS(Context c) {
+		
+		ourContext = c;
+		
+	}
+	
+	public SQLiteOpenHelperWMS open() {
+		
+		ourHelper = new DbHelper(ourContext);
+		ourDatabase = ourHelper.getWritableDatabase();
+		return this;
+		
+	}
+
+}

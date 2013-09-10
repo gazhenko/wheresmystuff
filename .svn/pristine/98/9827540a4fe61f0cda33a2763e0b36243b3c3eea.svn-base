@@ -1,0 +1,67 @@
+<!-- This xml sheet is the design for the user profile page. It includes the user's email,
+		the user's phone number (if specified when registering), and a list of the item's
+		the user has created (both found and lost) -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".UserActivity" >
+
+    <!-- This section is for the user's email label -->
+    
+    <TextView
+        android:id="@+id/usrLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/usr_prof"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/orange"
+        android:textStyle="bold"
+        android:textSize="26sp" />
+    
+    <!-- This section is for the user's phone number label -->
+
+    <TextView
+        android:id="@+id/usrLabel2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="@string/phoneNum"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/orange" />
+
+    <!-- This section is for the Item's label -->
+    
+    <TextView
+        android:id="@+id/items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        android:paddingBottom="2dp"
+        android:text="@string/items"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/orange" />
+
+    <!-- This section is for the list of Item's created by this user -->
+    
+    <ListView
+        android:id="@+id/itemList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray" >
+
+    </ListView>
+
+</LinearLayout>

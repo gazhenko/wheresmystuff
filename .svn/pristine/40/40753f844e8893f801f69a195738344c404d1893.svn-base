@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">Where\'s My Stuff</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="pass">Password: </string>
+    <string name="reg">Register</string>
+    <string name="log">Login</string>
+    <string name="usr">Username:</string>
+
+    <color name="gray">#444444</color>
+    <color name="orange">#f5991f</color>
+
+    <string name="phon">Phone Number: </string>
+    <string name="usr_prof">Email: </string>
+
+    <color name="black">#000000</color>
+
+    <string name="createItem">Create Item</string>
+    <string name="logOut">Logout</string>
+    <string name="title_activity_item">Item Details</string>
+    <string name="put_item_name_here">put item name here</string>
+    <string name="put_item_city_here">put item city here</string>
+    <string name="put_item_status_here">put item status here</string>
+    <string name="put_item_reward_here">put item reward here</string>
+    <string name="item_description_title">Description:</string>
+    <string name="put_item_description_here">put item description here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id ipsum non nulla sollicitudin condimentum. In at lacus quam. Fusce felis nisl, condimentum sed aliquam ac, dictum non magna. Nam pulvinar varius molestie. Aliquam erat volutpat. Proin tincidunt nisl eu quam pretium mollis. Fusce vel urna vel justo faucibus blandit. Sed vulputate erat nec dolor rutrum accumsan in in sem. Maecenas tempor, nibh vitae mattis rhoncus, nibh leo pellentesque nibh, non semper quam leo sed metus. Donec nec lacus ac lorem egestas dictum a sed ligula. Nunc tristique massa diam, ultricies mattis nisi. </string>
+    <string name="title_activity_create_item">Create New Item</string>
+    <string name="item_title">Title:</string>
+    <string name="item_reward">Reward ($):</string>
+    <string name="item_location">Location (found or lost):</string>
+    <string name="item_description">Description:</string>
+    <string name="item_found">Found</string>
+    <string name="item_lost">Lost</string>
+    <string name="item_create_item">Create Item</string>
+    <string name="phoneNum">Phone Number:</string>
+    <string name="items">Items:</string>
+    <string name="create_item_category_list">Pick A Category</string>
+
+    <string-array name="create_item_array_categories">
+        <item>General</item>
+        <item>Furniture</item>
+        <item>Jewelry</item>
+        <item>Clothing</item>
+        <item>Electronics</item>
+        <item>Household Item</item>
+    </string-array>
+
+    <string name="create_item_category">Category:</string>
+    <string name="cancel">Cancel</string>
+
+    <color name="white">#ffffff</color>
+
+    <string name="showlock">Show Locked Users</string>
+    <string name="showreg">Show Users</string>
+    <string name="showadmin">Show Admin Users</string>
+    <string name="createAdminUser">Create Admin</string>
+    <string name="delete">Delete</string>
+    <string name="submit">Submit</string>
+    <string name="locked">Locked</string>
+    <string name="unlocked">Unlocked</string>
+    <string name="admin">Admin</string>
+    <string name="nonadmin">Non Admin</string>
+
+    <color name="dark_gray">#222222</color>
+
+    <string name="users">Users</string>
+
+    <color name="light_gray">#666666</color>
+
+    <string name="date">Date Added: MM/DD/YYYY</string>
+
+    <color android:id="@+id/color1" name="light_light_gray" android:layout_width="wrap_content" android:layout_height="wrap_content">#999999</color>
+
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="search_activity_title">Search</string>
+    <string name="search_button_filter">Filter By..</string>
+    <string name="title_activity_filter_by">Filter By..</string>
+    <string name="menu_search_items">Search Items</string>
+    <string name="search_title">Filter By:</string>
+    <string name="search_name">Name:</string>
+    <string name="search_category">Category:</string>
+    <string name="search_reward">Reward:</string>
+    <string name="search_location">Location:</string>
+    <string name="search_date">Date:</string>
+    <string name="search_dash">/</string>
+    <string name="hint_name">name</string>
+    <string name="hint_reward">reward</string>
+    <string name="hint_city">City</string>
+    <string name="hint_MM">MM</string>
+    <string name="hint_DD">DD</string>
+    <string name="hint_YYYY">YYYY</string>
+    <string name="title_activity_filter_items">Filter By</string>
+    <string name="user_profile">home</string>
+    <string name="search_after">After</string>
+    <string name="search_before">Before</string>
+    <string name="search_exact">Exact </string>
+    <string name="search_lostFound">Lost Or Found:</string>
+    <string name="hint_state">State</string>
+    <string name="search_below">Below</string>
+    <string name="search_resolve">Resolved or Not Resolved:</string>
+    <string name="search_but_not_resolved">Not Resolved</string>
+    <string name="search_but_resolved">Resolved</string>
+    <string name="admin_profile">home</string>
+    <string name="put_item_state_here">put item state here</string>
+    <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="edit_item_text">Edit Item</string>
+    <string name="match_activity_title">Matches</string>
+    <string name="menu_match_items">Match Items</string>
+    <string name="match_button">Match</string>
+    <string name="title_activity_match_items">Match Item</string>
+
+</resources>

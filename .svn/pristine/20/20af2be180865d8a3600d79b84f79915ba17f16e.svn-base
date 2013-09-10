@@ -1,0 +1,189 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+/**
+ * This class creates the user profile 
+ * page activity. It has the menu options.
+ * 
+ * @author Petr
+ * @version 1.0 4March2013 Petr
+ */
+
+public class UserActivity extends Activity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ListView itemList;
+	private ArrayAdapter<String> itemAdapter;
+	private Context context;
+	public static int clickTask_item;
+	private ArrayList<Item> itemArrayList = new ArrayList<Item>();
+	private ArrayList<String> itemTitles = new ArrayList<String>();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		context = getApplicationContext();
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_user_profile);
+		final TextView userTextView = (TextView) findViewById(R.id.usrLabel);
+		userTextView.setText(Login.getCurrentUser().getUserName());
+		final TextView phoneTextView = (TextView) findViewById(R.id.usrLabel2);
+		phoneTextView.setText(Login.getCurrentUser().getPhoneNumber());
+		itemList = (ListView) findViewById(R.id.itemList);
+		itemArrayList = Search.byUser(Login.currentUser.getUserName());
+		if(itemArrayList.size() > 0) {
+			String lostOrFound = "";
+			for(int i = 0; i < itemArrayList.size(); i++) {
+				
+				if(itemArrayList.get(i).getIsFound()==true) {
+					
+					lostOrFound = "Found";
+					
+				}
+				else if(itemArrayList.get(i).getIsFound()==false) {
+					
+					lostOrFound = "Lost";
+					
+				}
+				itemTitles.add(itemArrayList.get(i).getTitle() + " : "+
+							   lostOrFound);
+			}// end for
+		}
+		else
+		{
+			itemTitles.add("No Items");
+		}
+		itemAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1,itemTitles);
+		itemList.setAdapter(itemAdapter);
+		
+		itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, 
+					int position,
+					long id) {
+
+				String itemName = ((TextView)view).getText().toString();
+				// find the ":" in the title
+				int index_of_endName = itemName.indexOf(":");
+				if (!itemName.equals("No Items")) {
+					
+					itemName = itemName.substring(0, index_of_endName-1);
+					
+				}
+				for (int i = 0; i < Search.items.size();i++) {
+					
+					if (Search.items.get(i).getTitle().equals(itemName)) {
+						
+						clickTask_item = i;
+						
+					}
+					
+				}
+				// check to make sure the text you click is an item
+				if (!itemName.equals("No Items")) {
+					
+					Intent myIntent = new Intent(view.getContext(), 
+							ItemActivity.class);
+					myIntent.putExtra("item", clickTask_item);
+					view.getContext().startActivity(myIntent);
+				
+				}
+			
+			}
+			
+		});
+		
+		itemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				
+				String itemName = ((TextView)arg1).getText().toString();
+				// find the ":" in the title
+				int index_of_endName = itemName.indexOf(":");
+				if (!itemName.equals("No Items")) {
+					
+					itemName = itemName.substring(0, index_of_endName-1);
+					
+				}
+				for (int i = 0; i < Search.items.size();i++) {
+					
+					if (Search.items.get(i).getTitle().equals(itemName)) {
+						
+						clickTask_item = i;
+						
+					}
+					
+				}
+				// check to make sure the text you click is an item
+				if (!itemName.equals("No Items")) {
+					
+					Intent myIntent = new Intent(arg1.getContext(), 
+							EditItemActivity.class);
+					myIntent.putExtra("item", clickTask_item);
+					arg1.getContext().startActivity(myIntent);
+				
+				}
+				return false;
+			
+			}
+			
+		});
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu,menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch(item.getItemId()){
+		case R.id.createItem:
+			Intent intent = new Intent(this,CreateItemActivity.class);
+			this.startActivity(intent);
+			break;
+		case R.id.logOut:
+			Login.logOut();
+			Intent intent2 = new Intent(this,MainActivity.class);
+			this.startActivity(intent2);
+			break;
+		case R.id.searchItem:
+			Intent intent3 = new Intent(this, SearchActivity.class);
+			this.startActivity(intent3);
+			break;
+		default:
+			return super.onOptionsItemSelected(item);
+			
+			
+		}
+		return true;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		
+		//do nothing!
+		
+	}
+
+}

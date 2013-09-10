@@ -1,0 +1,14 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+/**
+ * This class is used to write new
+ * users and new items to the 
+ * "database".
+ * 
+ * @author acranford6
+ * @version 1.0 2MAR2013 acranford6
+ *
+ */
+public class Writer {
+
+}

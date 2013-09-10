@@ -1,0 +1,298 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.util.ArrayList;
+
+/**
+ * This class is used to manage 
+ * the login and log out process
+ * for the wheres my stuff app
+ * @author acranford6
+ * @version 1.2 1MAR2013 acranford6
+ */
+public class Login {
+
+	public static User currentUser;
+	public static ArrayList<User> users = new ArrayList<User>();
+	private static User adminUser = new User("admin","admin",true);
+	
+	/**
+	 * This method is used to initialize 
+	 * the admin user account at the 
+	 * application startup
+	 */
+	public static void initAdminUser(){
+		users.add(adminUser);
+	}
+	
+	/**
+	 * This method is used to check the
+	 * name that was entered by a user
+	 * @param name entered username
+	 * @return index of name in array else -1 not found
+	 */
+	public static int checkName(String name) {
+		if (!users.isEmpty()) {
+			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i).getUserName().equals(name)) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}// end checkName
+
+	/**
+	 * This method is used to check a password
+	 * entered by a user.
+	 * 
+	 * @param pass valued entered by user
+	 * @param index name index in array
+	 * @return 1 if password is correct else -1 for incorrect
+	 */
+	public static int checkPass(String pass, int index) {
+		if (!users.isEmpty()) {
+			if (users.get(index).getPassWord().equals(pass)) {
+				return 1;
+			}
+		}
+		return -1;
+	}// end checkPass
+
+	/**
+	 * This method is used to check
+	 * all values entered by the user
+	 * and if correct, log the user 
+	 * in.
+	 * @param name username
+	 * @param pass password
+	 * @return 1 if user login / -1 if invalid username/ -2 incorrect passowrd/
+	 *         -3 if account is locked/ -4 if user is already logged in /
+	 *         -5 if a user is logged in and another user attemps loggin on the 
+	 *         same system
+	 */
+	public static int loginUser(String name, String pass) {
+		// CHECK USER NAME
+		int nameCheck = checkName(name);
+		if(currentUser != null)
+		{
+			if(nameCheck > 0 && users.get(nameCheck).getUserName().equals(currentUser.getUserName()))
+			{
+				return -4; // already logged in
+			}
+			else
+				return -5; // log out before trying to login to different user
+		}
+		if (nameCheck == -1) {
+			// pop up saying invalid username please register
+			return -1;
+		}
+		
+		//CHECK USER LOCKOUT
+		User tempUsr = users.get(nameCheck);
+		if(tempUsr.getIsLocked())
+		{
+			return -3; // user locked out
+		}
+		
+		//CHECK PASSWORD
+		int passCheck = checkPass(pass, nameCheck);
+		if (passCheck == -1) {
+			// pop up saying username is incorrect
+			return -2;
+		}
+		
+		currentUser = users.get(nameCheck);
+		return 1;
+	}// end registerUser
+	
+	// DELETE ME I AM FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public static int getFails(String name)
+	{
+		User tempUsr = users.get(checkName(name));
+		return tempUsr.getFails();
+	}
+	
+	/**
+	 * This method is used to register a user
+	 * into the system and run the logic for
+	 * the Register activity
+	 * @param name user name
+	 * @param pass password
+	 * @param phon phone number
+	 * @return 1 if register success, other values if error were found
+	 */
+	public static int registerUser(String name, String pass, String phon) {
+		//TODO add code to call register class to write to text file
+		int checkVal = validateRegName(name);
+		if(checkVal < 0)
+		{
+			return checkVal;
+		}
+		checkVal = validateRegPass(pass);
+		if(checkVal <0)
+		{
+			return checkVal;
+		}
+		User newU = new User(name, pass,phon);
+		users.add(newU);
+		return 1;
+	}
+	
+	public static int adminEditUser(String name, String pass, String phon,int index) {
+		int checkVal = 0;
+		if(!name.contains("@") || !users.get(index).getUserName().equals(name))
+		{
+			checkVal = validateRegName(name); 
+			if(checkVal < 0)
+			{
+				return checkVal;
+			}
+		}
+		checkVal = validateRegPass(pass);
+		if(checkVal <0)
+		{
+			return checkVal;
+		}
+		users.remove(index);
+		User newU = new User(name, pass,phon);
+		users.add(index,newU);
+		return 1;
+	}
+	
+	public static int adminEditAdmin(String name, String pass,int index) {
+		int checkVal = 0;
+		if(!users.get(index).getUserName().equals(name))
+		{
+			checkVal = validateAdminName(name);
+			if(checkVal < 0)
+			{
+				return checkVal;
+			}
+		}
+		checkVal = validateRegPass(pass);
+		if(checkVal <0)
+		{
+			return checkVal;
+		}
+		users.remove(index);
+		User newU = new User(name, pass,true);
+		users.add(index,newU);
+		return 1;
+	}
+	
+	public static int createAdmin(String name, String pass) {
+		int checkVal = validateAdminName(name);
+		if(checkVal < 0)
+		{
+			return checkVal;
+		}
+		checkVal = validateRegPass(pass);
+		if(checkVal <0)
+		{
+			return checkVal;
+		}
+		User newU = new User(name, pass,true);
+		users.add(newU);
+		return 1;
+	}
+	
+	/**
+	 * This method is used to ensure
+	 * the user is entering a valid 
+	 * username and that the username 
+	 * does not already exist in the system.
+	 * 
+	 * @param name username
+	 * @return 1 if name is valid, other if errors found
+	 */
+	private static int validateRegName(String name)
+	{
+		if(!name.contains("@"))
+		{
+			return -2;
+		}
+		int checkVal = checkName(name);
+		if(checkVal == -1)
+		{
+			return 1;
+		}
+		if(name.equals(""))
+		{
+			return -3;
+		}
+		return -1;
+	}
+	
+	private static int validateAdminName(String name)
+	{
+		int checkVal = checkName(name);
+		if(checkVal == -1)
+		{
+			return 1;
+		}
+		if(name.equals(""))
+		{
+			return -3;
+		}
+		return -1;
+	}
+	
+	/**
+	 * This method is used to ensure the 
+	 * password for the account a valid
+	 * password of 5 characters long.
+	 * 
+	 * @param pass password 
+	 * @return 1 if password is valid, other if errors found
+	 */
+	private static int validateRegPass(String pass)
+	{
+		if(pass.length()<5)
+		{
+			return -4;
+		}
+		if(pass.equals(""))
+		{
+			return -5;
+		}
+		return 1;
+	}
+	
+	/**
+	 * This method is used to add 
+	 * a fail to the user's account
+	 * when an incorrect password is
+	 * used to login to the system.
+	 * 
+	 * @param name username
+	 * @return 1 if fail was increased, -1 if increased and at max lockout 
+	 */
+	public static int addPassFail(String name)
+	{
+		int checkVal = checkName(name);
+		User tempUsr = users.get(checkVal);
+		if(checkVal > 0 && !users.get(checkVal).getIsAdmin())
+		{
+			if(tempUsr.getFails() < 2)
+			{
+				tempUsr.incFails();
+				return 1; // not locked out yet
+			}
+			else
+			{
+				tempUsr.setIsLocked(true);
+				return -1; // locked out
+			}
+		}// end if
+		return 1;
+	}// end addPassFail
+	
+	public static User getCurrentUser(){
+		return currentUser;
+	}
+	
+	public static void logOut(){
+		currentUser = null;
+	}
+
+}// end Login

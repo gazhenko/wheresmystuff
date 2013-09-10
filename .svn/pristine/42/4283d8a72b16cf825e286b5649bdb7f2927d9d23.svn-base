@@ -1,0 +1,203 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import java.io.Serializable;
+
+/**
+ * This class is used to create an item object.
+ * 
+ * @author acranford6
+ * @version 1.0 26Feb2013
+ */
+public class Item implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String title;
+	private String category;
+	private String city;
+	private String state;
+	private String description;
+	private String creator;
+	private boolean isFound;
+	private String reward;
+	private boolean isResolved;
+	private int month;
+	private int day;
+	private int year;
+	private String user;
+
+	/**
+	 * Constructor
+	 * 
+	 * This is the constructor for the item class
+	 * 
+	 * @param title
+	 * @param category
+	 * @param location
+	 * @param description
+	 * @param status
+	 * @param reward
+	 * @param type
+	 * @param month
+	 * @param day
+	 * @param year
+	 * @param user
+	 */
+	public Item(String title, String category, String city, String state,
+			String description, boolean isFound, String reward,int month, 
+			int day, int year,boolean isResolved, String user) {
+		this.title = title;
+		this.category = category;
+		this.city = city;
+		this.state = state;
+		this.description = description;
+		this.isFound = isFound;
+		this.reward = reward;
+		this.isResolved = isResolved;
+		this.month = month;
+		this.day = day;
+		this.year = year;
+		this.user = user;
+		
+	}// end Constructor
+
+	/*
+	 * getters
+	 */
+
+	// get the title of the item
+	public String getTitle() {
+		return title;
+	}// end getTitle
+
+	// get the category of the item
+	public String getCategory() {
+		return category;
+	}// end getCategory
+
+	// get the city of the item
+	public String getCity() {
+		return city;
+	}// end getLocation
+	
+	// get the state of the item
+	public String getState() {
+		return state;
+	}
+
+	// get the description of the item
+	public String getDescription() {
+		return description;
+	}// end getDescription
+	
+	// get the creator of the item
+	public String getCreator(){
+		return creator;
+	}// end getCreator
+
+	// get the status of the item
+	public boolean getIsFound() {
+		return isFound;
+	}// end getStatus
+
+	// get the reward of the item
+	public String getReward() {
+		return reward;
+	}// end getReward
+	
+	// get the type of the item
+	public boolean getIsResolved() {
+		return isResolved;
+	}// end getType
+
+	// get the month of the item was created
+	public int getMonth() {
+		return month;
+	}// end getMonth
+
+	// get the day of the item was created
+	public int getDay() {
+		return day;
+	}// end getDay
+
+	// get the year of the item was created
+	public int getYear() {
+		return year;
+	}// end getYear
+	
+	// get the user string of the user that created the item
+	public String getUser() {
+		return user;
+	}
+	
+
+	/*
+	 * setters of item
+	 */
+	// set the title of the item
+	public void setTitle(String arg) {
+		title = arg;
+	}// end setTitle
+
+	// set the category of the item
+	public void setCategory(String arg) {
+		category = arg;
+	}// end setCategory
+
+	// set the city of the item
+	public void setCity(String arg) {
+		city = arg;
+	}// end setLocation
+	
+	// set the state of the item
+	public void setState(String arg) {
+		state = arg;
+	}// end setState
+
+	// set the description of the item
+	public void setDescription(String arg) {
+		description = arg;
+	}// end setDescription
+
+	// set the creator of the item
+	public void setCreator(String arg) {
+		creator = arg;
+	}// end setCreator
+
+	// set the status of the item
+	public void setIsFound(boolean arg) {
+		isFound = arg;
+	}// end setStatus
+
+	// set the reward of the item
+	public void setReward(String arg) {
+		reward = arg;
+	}// end setReward
+
+	// set the title of the item
+	public void setisResolved(boolean arg) {
+		isResolved = arg;
+	}// end setType
+
+	// set the title of the item
+	public void setMonth(int arg) {
+		month = arg;
+	}// end setMonth
+
+	// set the title of the item
+	public void setDay(int arg) {
+		day = arg;
+	}// end setDay
+
+	// set the title of the item
+	public void setYear(int arg) {
+		year = arg;
+	}// end setYear
+	
+	// set the user of the item
+	public void setUser(String arg) {
+		user = arg;
+	}
+	 
+}// end Item

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/gray" >
+        
+     	<TextView
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:text="@string/popup_title"
+         	android:textColor="@color/orange"
+         	android:textSize="22sp" />
+
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         		android:id="@+id/popup_name"
+         		android:layout_width="wrap_content"
+         		android:layout_height="wrap_content"
+         		android:text="@string/popup_name"
+         		android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/popup_name_input"
+             	android:layout_width="0dip"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_name"
+             	android:textColor="@color/light_light_gray" >
+             	<requestFocus /> 
+            </EditText>
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/popup_category"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:layout_gravity="center_vertical"
+         	    android:text="@string/popup_category"
+         	    android:textColor="@color/orange" />
+         	
+         	<Spinner
+         	    android:id="@+id/popup_category_input"
+         	    android:layout_width="match_parent"
+         	    android:layout_height="wrap_content"
+         	    android:entries="@array/create_item_array_categories"
+         	    android:textColor="@color/orange" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/popup_reward"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/popup_reward"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/popup_reward_input"
+             	android:layout_width="0dip"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_reward"
+             	android:textColor="@color/light_light_gray" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/popup_location"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/popup_location"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/popup_location_input"
+             	android:layout_width="0dip"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_location"
+             	android:textColor="@color/light_light_gray" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/popup_date"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/popup_date"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/popup_month_input"
+             	android:layout_width="20dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_MM"
+             	android:textColor="@color/light_light_gray" />
+         	
+         	<TextView
+         	    android:id="@+id/popup_dash1"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/popup_dash"
+         	    android:textColor="@color/light_light_gray" />
+         	
+        	<EditText
+             	android:id="@+id/popup_day_input"
+             	android:layout_width="20dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_DD"
+             	android:textColor="@color/light_light_gray" />
+        	
+        	<TextView
+         	    android:id="@+id/popup_dash2"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/popup_dash"
+         	    android:textColor="@color/light_light_gray" />
+         	         	
+        	<EditText
+             	android:id="@+id/popup_year_input"
+             	android:layout_width="35dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_YYYY"
+             	android:textColor="@color/light_light_gray" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+
+     	    <RadioGroup
+		        android:id="@+id/radioGroup1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical"
+		        android:layout_gravity="left"  >
+		        
+			    <RadioButton
+			        android:id="@+id/button_item_found"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/item_found"
+			        android:textColor="@color/light_light_gray" />
+			
+			    <RadioButton
+			        android:id="@+id/button_item_lost"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/item_lost"
+			        android:textColor="@color/light_light_gray" />
+		    
+		    </RadioGroup>
+
+     	</LinearLayout>
+     	
+     	
+     
+     	<LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:layout_gravity="center_horizontal"
+         	android:background="@color/gray" >
+
+         	<Button
+         	    android:id="@+id/popup_button_filter"
+         	    android:layout_width="150dp"
+         	    android:layout_height="wrap_content"
+         	    android:layout_margin="2dp"
+         	    android:background="@color/orange"
+         	    android:text="@string/submit" />
+
+	        <Button
+	            android:id="@+id/popup_button_cancel"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="2dp"
+	            android:background="@color/orange"
+	            android:text="@string/cancel" />
+
+     	</LinearLayout>
+
+</LinearLayout>

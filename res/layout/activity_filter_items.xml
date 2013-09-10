@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/gray" xmlns:tools="http://schemas.android.com/tools">
+        
+     	<TextView
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:text="@string/search_title"
+         	android:textColor="@color/orange"
+         	android:textSize="22sp" />
+
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         		android:id="@+id/search_name"
+         		android:layout_width="wrap_content"
+         		android:layout_height="wrap_content"
+         		android:text="@string/search_name"
+         		android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/search_name_input"
+             	android:layout_width="0dip"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_name"
+             	android:textColor="@color/light_light_gray" >
+             	<requestFocus /> 
+            </EditText>
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/search_category"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:layout_gravity="center_vertical"
+         	    android:text="@string/search_category"
+         	    android:textColor="@color/orange" />
+         	
+         	<Spinner
+         	    android:id="@+id/search_category_input"
+         	    android:layout_width="match_parent"
+         	    android:layout_height="wrap_content"
+         	    android:entries="@array/create_item_array_categories"
+         	    android:textColor="@color/orange" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/search_reward"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/search_reward"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/search_reward_input"
+             	android:layout_width="0dip"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_reward"
+             	android:textColor="@color/light_light_gray" />
+     	</LinearLayout>
+    	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/search_location"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/search_location"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/search_city_input"
+             	android:layout_width="0dp"
+             	android:layout_height="50dp"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_city"
+             	android:textColor="@color/light_light_gray" />
+         	<EditText
+             	android:id="@+id/search_state_input"
+             	android:layout_width="0dp"
+             	android:layout_height="50dp"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_state"
+             	android:textColor="@color/light_light_gray" />
+         
+     	</LinearLayout>
+     	
+     	<LinearLayout
+         	android:layout_width="fill_parent"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:background="@color/gray" >
+         
+         	<TextView
+         	    android:id="@+id/search_date"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/search_date"
+         	    android:textColor="@color/orange" />
+
+         	<EditText
+             	android:id="@+id/search_month_input"
+             	android:layout_width="20dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_MM"
+             	android:textColor="@color/light_light_gray" />
+         	
+         	<TextView
+         	    android:id="@+id/search_dash1"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/search_dash"
+         	    android:textColor="@color/light_light_gray" />
+         	
+        	<EditText
+             	android:id="@+id/search_day_input"
+             	android:layout_width="20dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_DD"
+             	android:textColor="@color/light_light_gray" />
+        	
+        	<TextView
+         	    android:id="@+id/search_dash2"
+         	    android:layout_width="wrap_content"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/search_dash"
+         	    android:textColor="@color/light_light_gray" />
+         	         	
+        	<EditText
+             	android:id="@+id/search_year_input"
+             	android:layout_width="35dp"
+             	android:layout_height="wrap_content"
+             	android:layout_weight="1"
+             	android:hint="@string/hint_YYYY"
+             	android:textColor="@color/light_light_gray" />
+         
+     	</LinearLayout>
+     	
+     	 <RadioGroup
+		        android:id="@+id/search_dateRadioGroup"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:layout_gravity="left"  >
+		        
+			    <RadioButton
+			        android:id="@+id/search_date_button_above"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/search_after"
+			        android:textColor="@color/light_light_gray" />
+			
+			    <RadioButton
+			        android:id="@+id/search_date_button_before"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/search_before"
+			        android:textColor="@color/light_light_gray" />
+			    
+			    <RadioButton
+			        android:id="@+id/search_date_button_exact"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/search_exact"
+			        android:textColor="@color/light_light_gray" />
+		    
+		    </RadioGroup>
+     	
+     	<TextView
+        android:id="@+id/search_lostFoundLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:text="@string/search_lostFound" /> 
+
+     	    <RadioGroup
+		        android:id="@+id/search_lostFound_radioGroup"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:layout_gravity="left"  >
+		        
+			    <RadioButton
+			        android:id="@+id/search_button_item_found"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/item_found"
+			        android:textColor="@color/light_light_gray" />
+			
+			    <RadioButton
+			        android:id="@+id/search_button_item_lost"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/item_lost"
+			        android:textColor="@color/light_light_gray" />
+		    
+		    </RadioGroup>
+
+     	
+     <TextView
+        android:id="@+id/resolveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:text="@string/search_resolve" /> 
+
+     	    <RadioGroup
+		        android:id="@+id/search_resolve_radioGroup"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:layout_gravity="left"  >
+		        
+			    <RadioButton
+			        android:id="@+id/search_button_resolve"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/search_but_resolved"
+			        android:textColor="@color/light_light_gray" />
+			
+			    <RadioButton
+			        android:id="@+id/search_button_notReslove"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/search_but_not_resolved"
+			        android:textColor="@color/light_light_gray" />
+		    
+		    </RadioGroup>	
+     	
+     
+     	<LinearLayout
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_margin="1dp"
+         	android:orientation="horizontal"
+         	android:layout_gravity="center_horizontal"
+         	android:background="@color/gray" >
+
+         	<Button
+         	    android:id="@+id/search_button_filter"
+         	    android:layout_width="150dp"
+         	    android:layout_height="wrap_content"
+         	    android:layout_margin="2dp"
+         	    android:background="@color/orange"
+         	    android:text="@string/submit" />
+
+	        <Button
+	            android:id="@+id/search_button_cancel"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="2dp"
+	            android:background="@color/orange"
+	            android:text="@string/cancel"
+	            tools:ignore="ButtonOrder" />
+
+     	</LinearLayout>
+
+</LinearLayout>

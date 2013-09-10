@@ -1,0 +1,85 @@
+package edu.gatech.cs2340.thenullterminators.wheresmystuff;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+public class ItemActivity extends Activity {
+
+	TextView dateOutput, nameOutput, rewardOutput, cityOutput, stateOutput,
+	statusOutput, descriptionOutput;
+	Item item;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_item);
+		dateOutput = (TextView) findViewById(R.id.item_activity_date);
+		nameOutput = (TextView) findViewById(R.id.item_activity_name);
+		rewardOutput = (TextView) findViewById(R.id.item_activity_reward);
+		cityOutput = (TextView) findViewById(R.id.item_activity_city);
+		stateOutput = (TextView) findViewById(R.id.item_activity_state);
+		statusOutput = (TextView) findViewById(R.id.item_activity_status);
+		descriptionOutput = (TextView) findViewById(R.id.
+				item_activity_description_input);
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		item = Search.items.get(bundle.getInt("item"));
+		String temp = "Date Added: " + item.getMonth() + "/" + item.getDay() + 
+				"/" + item.getYear();
+		dateOutput.setText(temp);
+		nameOutput.setText(item.getTitle());
+		rewardOutput.setText(item.getReward());
+		cityOutput.setText(item.getCity());
+		stateOutput.setText(item.getState());
+		String temp2 = "Lost";
+		if (item.getIsFound()) {
+			temp2 = "Found";
+		}
+		statusOutput.setText(temp2);
+		descriptionOutput.setText(item.getDescription());
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch(item.getItemId()){
+		case R.id.createItem:
+			Intent intent = new Intent(this,CreateItemActivity.class);
+			this.startActivity(intent);
+			break;
+		case R.id.logOut:
+			Login.logOut();
+			Intent intent2 = new Intent(this,MainActivity.class);
+			this.startActivity(intent2);
+			break;
+		case R.id.searchItem:
+			Intent intent3 = new Intent(this, SearchActivity.class);
+			this.startActivity(intent3);
+			break;
+		case R.id.user_profile:
+			Intent intent4 = new Intent(this,UserActivity.class);
+			this.startActivity(intent4);
+			break;
+		default:
+			return super.onOptionsItemSelected(item);
+			
+			
+		}
+		return true;
+	}
+
+
+	
+}
